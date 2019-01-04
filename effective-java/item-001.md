@@ -70,7 +70,7 @@ Animal animal = new Animal('dog'); // 생성자로는 Animal 타입밖에..
 
 ### 5. static 팩토리 메소드를 작성할 때는 리턴하는 객체의 클래스가 반드시 존재하지 않아도 된다.
 
-위의 특징은 `Service Provider 프레임워크`의 기반이 된다. // TODO 프레임워크 공부할 것
+위의 특징은 `Service Provider 프레임워크`의 기반이 된다. <!-- TODO 프레임워크 공부할 것 -->
 
 `Service Prodier`의 구성요소
 - 서비스의 구현체를 대표하는 `Service Interface`
