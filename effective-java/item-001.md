@@ -83,4 +83,6 @@ Animal animal = new Animal('dog'); // 생성자로는 Animal 타입밖에..
 - Service Access API : `DriverManager.getConnection`
 - Service Provider Interface : `Driver`
 
+----
+
 ## Static 팩토리 메소드의 단점
