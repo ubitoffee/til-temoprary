@@ -174,43 +174,57 @@ public class SizeBurger extends Hamburger {
     protected Builder self() {
       return this;
     }
-    
-    // 생성자는 private으로 비공개
-    private SizeBurger(Builder builder) {
-      // super
-      super(builder);
-      size = builder.size;
-    }
   }
-  ```
+    
+  // 생성자는 private으로 비공개
+  private SizeBurger(Builder builder) {
+    // super
+    super(builder);
+    size = builder.size;
+  }
+}
+```
   
-  ```java
-  public class PackedBurger extends Hamburger {
-    private final boolean isPacked;
-    
-    public stastic class Builder extends Hamburger.Builder<Builder> {
-      private final isPacked = false;
-      
-      public Builder(boolean isPacked) {
-        this.isPacked = isPacked;
-        return this;
-      }
-      
-      @Override
-      public PackedBurger build();
-        return new PackedBurger(this);
-      }
-      
-      @Override
-      protected Builder self() {
-        return this;
-      }
+```java
+public class PackedBurger extends Hamburger {
+  private final boolean isPacked;
+
+  public stastic class Builder extends Hamburger.Builder<Builder> {
+    private final isPacked = false;
+
+    public Builder packed() {
+      this.isPacked = true;
+      return this;
     }
-    
-    private PackedBurger(Builder builder) {
-      super(builder);
-      isPacked = builder.isPacked;
+
+    @Override
+    public PackedBurger build();
+      return new PackedBurger(this);
+    }
+
+    @Override
+    protected Builder self() {
+      return this;
     }
   }
+
+  private PackedBurger(Builder builder) {
+    super(builder);
+    isPacked = builder.isPacked;
+  }
+}
+ ```
+ 
+ 아래와 같이 메소드 체이닝형태로 인스턴스를 얻을 수 있다.
+ 
+  ```java
+  SizeBurger bigSizeBurger = new SizeBurger.Builder(BIG)
+      .addTopping(Hamburger.Topping.CHEEZE)
+      .addTopping(Hamburger.Topping.KETCHUP)
+      .build();
+      
+  PackedBurger = new PackedBurger.Builder()
+      .addTopping(Hamburger.Topping.ONION)
+      .packed()
+      .build();
   ```
-    
