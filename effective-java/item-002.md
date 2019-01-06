@@ -59,3 +59,54 @@ character.setStr(20);
 <!-- After: Freeze -->
 
 ## 3. Builder 패턴
+
+1. 필수 매개변수만을 사용하여 `Builder` 인스턴스를 얻은 후
+2. 빌더 클래스가 제공하는 `setter`들을 이용하여 선택적으로 매개변수를 적용하고
+3. 매개변수가 없는 `build`를 호출하여 실제 원하는 인스턴스를 얻는다.
+
+```java
+public class Character {
+  private final int hp;
+  private final int mp;
+  private final int str;
+  private final int dex;
+  pirvate final int int;
+  private final int lck;
+
+  public static class Builder {
+    // 필수 HP / MP
+    private final int hp;
+    private final int mp;
+    
+    // 선택 스탯
+    private int str = 0;
+    private int dex = 0;
+    pirvate int int = 0;
+    private int lck = 0;
+    
+    // Builder 생성자
+    public Builder (int hp, int mp) {
+      this.hp = hp;
+      this.mp = mp;
+    }
+    
+    public Builder str(int val) {
+      str = val;
+      return this;
+    }
+    
+    ...
+    
+    public Character build() {
+      return new Character(this);
+    }
+  }
+  
+  private Character(Builder builder) {
+    hp = builder.hp;
+    mp = builder.mp;
+    str = builder.str;
+    ...
+  }
+}
+```
