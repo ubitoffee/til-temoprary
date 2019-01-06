@@ -40,3 +40,22 @@ Character warrior = new Warrior(200, 100, 20, 10, 0, 5);
 ```
 
 위와 같은 경우는 필요하지않은 int 스탯에도 기본값 0을 넘겨야하는 불편함이 있다.
+
+## 2. 자바빈즈 (Java Beans) 패턴
+
+자바 빈즈 패턴은 매개변수를 받지 않는 빈 생성자를 생성 후 setter를 통해 필드값을 생성하는 방식이다.
+
+```java
+Character warrior = new Character();
+character.setHp(250);
+character.setMp(200);
+character.setStr(20);
+```
+
+위의 패턴의 문제점을 어느정도 보완했지만, **객체 하나를 만들기 위해 필드당 하나꼴로 메소드가 호출**되야 하는 문제점으로 인해 객체가 완전히 생성될 때 까지는 일관성이 무너진다.
+
+이러한 문제로 인해 이 패턴에서는 불변 클래스([[아이템 17]('item-017.md'))로 만들 수 없고 스레드 안전성을 위한 추가 작업(lock)이 필요하다.
+
+<!-- After: Freeze -->
+
+## 3. Builder 패턴
