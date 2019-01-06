@@ -121,3 +121,96 @@ Character warrior = new Character.Builder(200, 100).str(20).dex(10).lck(5).build
 
 `Builder` 패턴은 계층구조로 설계된 클래스에서 사용하기 좋다.
 
+아래는 햄버거를 만드는 Builder 패턴이다.
+
+```java
+public abstract class Hamburger {
+  public enum Topping {
+    PATTY, ONION, KETCHUP, CHEEZE
+  }
+  
+  final Set<Topping> toppings;
+  
+  abstract static class Builder<T extends Builder<T>> { // 재귀적인 타입 매개변수
+    EnumSet<Topping> toppings = EnumSet.noneOf(Topping.class);
+    
+    public T addTopping(Topping topping) {
+      toppings.add(Objects.requireNonNull(topping));
+      return self();
+    }
+    
+    abstract Hamburger build(); // Convariant 리턴타입
+    protected abstract T self(); // self-tyle 개념을 이용하여 Method-chaining
+    
+    Hamburger(Builder<?> builder {
+      toppings = builder.toppings.clone();
+    }
+  }
+```
+
+아래는 햄버거를 확장한 버전이다.
+  
+```java
+public class SizeBurger extends Hamburger {
+  public enum Size {
+    SMALL, MEDIUM, BIG
+  }
+
+  private final Size size;
+
+  public static class Builder extends Hamburger.Builder<Builder> {
+    private final Size size;
+
+    public Builder(Size size) {
+      this.size = Objects.requireNonNull(size);
+    }
+
+    @Override
+    public SizeBurger build();
+      return new SizeBurger(this);
+    }
+
+    @Override
+    protected Builder self() {
+      return this;
+    }
+    
+    // 생성자는 private으로 비공개
+    private SizeBurger(Builder builder) {
+      // super
+      super(builder);
+      size = builder.size;
+    }
+  }
+  ```
+  
+  ```java
+  public class PackedBurger extends Hamburger {
+    private final boolean isPacked;
+    
+    public stastic class Builder extends Hamburger.Builder<Builder> {
+      private final isPacked = false;
+      
+      public Builder(boolean isPacked) {
+        this.isPacked = isPacked;
+        return this;
+      }
+      
+      @Override
+      public PackedBurger build();
+        return new PackedBurger(this);
+      }
+      
+      @Override
+      protected Builder self() {
+        return this;
+      }
+    }
+    
+    private PackedBurger(Builder builder) {
+      super(builder);
+      isPacked = builder.isPacked;
+    }
+  }
+  ```
+    
