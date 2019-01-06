@@ -110,3 +110,14 @@ public class Character {
   }
 }
 ```
+
+위와 같은 Builder 패턴으로 생성할 경우 아래와 같은 방식으로 인스턴스를 생성할 수 있다.
+
+```java
+Character warrior = new Character.Builder(200, 100).str(20).dex(10).lck(5).build();
+```
+
+`Builder`의 불변식을 보장하기 위해서는 빌더에서 매개변수를 복사한 후 각 객체 필드를 검사 ([Item 50](item-050.md))하고, 검사 후 매개변수의 문제를 알려주는 `IllegalArgumentException` ([Item 75](item-075.md))를 Throw 한다.
+
+`Builder` 패턴은 계층구조로 설계된 클래스에서 사용하기 좋다.
+
