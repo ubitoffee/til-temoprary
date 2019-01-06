@@ -95,3 +95,5 @@ Animal animal = new Animal('dog'); // 생성자로는 Animal 타입밖에..
 ### 2. 프로그래머가 static 팩토리 메소드를 찾기 어렵다.
 
 문서화를 잘하자!
+
+> Static 팩토리 메소드 네이밍 - 책 p.12 ~ 13 참조
